@@ -1,98 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+  <meta charset="UTF-8" />
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+  <meta name="description" content="A new Flutter project." />
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+  <!-- For responsive layout -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-  -->
-  <base href="/website/">
+  <!-- PWA modern meta tags -->
+  <meta name="theme-color" content="#000000" />
+  <meta name="application-name" content="Flutter Web App" />
+  <meta name="apple-mobile-web-app-title" content="Flutter Web App" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <!-- Base href for GitHub Pages -->
+  <base href="/website/" />
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="flutter_profile">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <title>Flutter Web</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="icons/Icon-192.png" />
 
-  <title>flutter_profile</title>
-  <link rel="manifest" href="manifest.json">
+  <style>
+    /* Loader styling */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: sans-serif;
+      font-size: 1.2em;
+      z-index: 9999;
+    }
+    #loader img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-<!-- This script installs service_worker.js to provide PWA functionality to
-     application. For more information, see:
-     https://developers.google.com/web/fundamentals/primers/service-workers -->
+<!-- Loader -->
+<div id="loader">
+  <div style="text-align:center;">
+    <img src="assets/images/loader.gif" alt="Loading..." />
+    <div>Loading, please wait...</div>
+  </div>
+</div>
+
+<script src="flutter.js" defer></script>
 <script>
-  const serviceWorkerVersion = "3794712501";
-  var scriptLoaded = false;
-  function loadMainDartJs() {
-    if (scriptLoaded) {
-      return;
-    }
-    scriptLoaded = true;
-    var scriptTag = document.createElement('script');
-    scriptTag.src = 'main.dart.js';
-    scriptTag.type = 'application/javascript';
-    document.body.append(scriptTag);
-  }
-
-  if ('serviceWorker' in navigator) {
-    // Service workers are supported. Use them.
-    window.addEventListener('load', function () {
-      // Wait for registration to finish before dropping the <script> tag.
-      // Otherwise, the browser will load the script multiple times,
-      // potentially different versions.
-      var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
-      navigator.serviceWorker.register(serviceWorkerUrl)
-        .then((reg) => {
-          function waitForActivation(serviceWorker) {
-            serviceWorker.addEventListener('statechange', () => {
-              if (serviceWorker.state == 'activated') {
-                console.log('Installed new service worker.');
-                loadMainDartJs();
-              }
-            });
-          }
-          if (!reg.active && (reg.installing || reg.waiting)) {
-            // No active web worker and we have installed or are installing
-            // one for the first time. Simply wait for it to activate.
-            waitForActivation(reg.installing ?? reg.waiting);
-          } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
-            // When the app updates the serviceWorkerVersion changes, so we
-            // need to ask the service worker to update.
-            console.log('New service worker available.');
-            reg.update();
-            waitForActivation(reg.installing);
-          } else {
-            // Existing service worker is still good.
-            console.log('Loading app from service worker.');
-            loadMainDartJs();
-          }
+  window.addEventListener('load', function() {
+    _flutter.loader.loadEntrypoint({
+      serviceWorker: {
+        serviceWorkerVersion: null,
+      },
+      onEntrypointLoaded: function(engineInitializer) {
+        engineInitializer.initializeEngine().then(function(appRunner) {
+          appRunner.runApp();
+          document.getElementById("loader").style.display = "none";
         });
-
-      // If service worker doesn't succeed in a reasonable amount of time,
-      // fallback to plaint <script> tag.
-      setTimeout(() => {
-        if (!scriptLoaded) {
-          console.warn(
-            'Failed to load app from service worker. Falling back to plain <script> tag.',
-          );
-          loadMainDartJs();
-        }
-      }, 4000);
+      }
     });
-  } else {
-    // Service workers not supported. Just drop the <script> tag.
-    loadMainDartJs();
-  }
+  });
 </script>
 </body>
 </html>
