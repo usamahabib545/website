@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_profile/widgets/cachedImageWidget.dart';
 
 class DottedVerticalLine extends StatelessWidget {
   final double height;
@@ -48,6 +51,8 @@ class _DottedLinePainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 void openImagePopup(BuildContext context, String imageUrl, String tag) {
+  log("imageUrl.toString()");
+  log(imageUrl.toString());
   showDialog(
     context: context,
     builder: (_) => Dialog(
@@ -63,11 +68,13 @@ void openImagePopup(BuildContext context, String imageUrl, String tag) {
               maxScale: 4,
               child: Hero(
                 tag: tag,
-                child: Image.network(imageUrl),
+                child: CachedImage(
+                  imagePath: imageUrl,
+                  borderRadius: 8,
+                ),
               ),
             ),
           ),
-
           // Close button (top-left)
           Positioned(
             top: 16,

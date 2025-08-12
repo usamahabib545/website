@@ -23,7 +23,7 @@ class ScreenshotsScreen extends StatelessWidget {
                 child: Hero(
                   tag: tag,
                   child: CachedImage(
-                    imageUrl: imageUrl,
+                    imagePath: imageUrl,
                     fit: BoxFit.contain,
                     borderRadius: 0,
                   ),
@@ -74,7 +74,7 @@ class ScreenshotsScreen extends StatelessWidget {
                   child: Hero(
                     tag: tag,
                     child: CachedImage(
-                      imageUrl: imageUrl,
+                      imagePath: imageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),

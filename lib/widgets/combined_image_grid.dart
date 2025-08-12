@@ -27,7 +27,7 @@ class CombinedRowNetworkImages extends StatelessWidget {
                 child: Hero(
                   tag: heroTag,
                   child: CachedImage(
-                    imageUrl: url,
+                    imagePath: url,
                     borderRadius: 8,
                   ),
                 ),

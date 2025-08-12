@@ -33,7 +33,7 @@ List<Project> demo_projects = [
     // githubLink: "https://github.com/yourname/ai-image-app",
     playStoreLink: "https://play.google.com/store/apps/details?id=com.example.aiimage",
     appStoreLink: "https://apps.apple.com/app/id1234567890",
-    screenshot: ["assets/images/aruna/1.png", "assets/images/aruna/2.png", "assets/images/aruna/3.png", "assets/images/aruna/4.png"],
+    // screenshot: ["assets/images/aruna/1.png", "assets/images/aruna/2.png", "assets/images/aruna/3.png", "assets/images/aruna/4.png"],
   ),
   Project(
     title: "Aruna",
