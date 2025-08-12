@@ -1,74 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
-  <meta name="description" content="A new Flutter project." />
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="My Flutter Web App">
 
-  <!-- For responsive layout -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#000000">
 
-  <!-- PWA modern meta tags -->
-  <meta name="theme-color" content="#000000" />
-  <meta name="application-name" content="Flutter Web App" />
-  <meta name="apple-mobile-web-app-title" content="Flutter Web App" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <!-- Recommended for PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Flutter App">
 
-  <!-- Base href for GitHub Pages -->
-  <base href="/website/" />
+  <title>Flutter Web App</title>
 
-  <title>Flutter Web</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" type="image/png" href="icons/Icon-192.png" />
+  <!-- Base Href (important for GitHub Pages) -->
+  <base href="/website/">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Splash Screen / Loader -->
   <style>
-    /* Loader styling */
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
+    body {
+      margin: 0;
+      background: #121212;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      height: 100vh;
       color: white;
       font-family: sans-serif;
-      font-size: 1.2em;
-      z-index: 9999;
+    }
+    #loader {
+      text-align: center;
     }
     #loader img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 10px;
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-<!-- Loader -->
 <div id="loader">
-  <div style="text-align:center;">
-    <img src="assets/images/loader.gif" alt="Loading..." />
-    <div>Loading, please wait...</div>
-  </div>
+  <img src="assets/images/logo.png" alt="Loading..." />
+  <p>Loading...</p>
 </div>
 
-<script src="flutter.js" defer></script>
-<script>
-  window.addEventListener('load', function() {
-    _flutter.loader.loadEntrypoint({
-      serviceWorker: {
-        serviceWorkerVersion: null,
-      },
-      onEntrypointLoaded: function(engineInitializer) {
-        engineInitializer.initializeEngine().then(function(appRunner) {
-          appRunner.runApp();
-          document.getElementById("loader").style.display = "none";
-        });
-      }
-    });
-  });
-</script>
+<script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
